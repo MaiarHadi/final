@@ -4,7 +4,8 @@
   "description": "In this Project Students will optimize and test a front-end web application called Study Night, a flashcard tool...",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp":"gulp"
   },
   "repository": {
     "type": "git",
