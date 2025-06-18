@@ -130,7 +130,7 @@
 
   // Only insert newRequire.load when it is actually used.
   // The code in this file is linted against ES5, so dynamic import is not allowed.
-  // INSERT_LOAD_HERE
+  function $parcel$resolve(url) {  url = importMap[url] || url;  return import.meta.resolve(distDir + url);}newRequire.resolve = $parcel$resolve;
 
   Object.defineProperty(newRequire, 'root', {
     get: function () {
@@ -160,11 +160,11 @@
       });
     }
   }
-})({"9mUY7":[function(require,module,exports,__globalThis) {
+})({"6Qg92":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 1234;
+var HMR_SERVER_PORT = 52043;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -1076,38 +1076,26 @@ const createSetForm = (setCards)=>{
     form.className = "notVisible";
     //Creates the label for the title input
     const label = (0, _utilityRenderFunctionsJs.createLabel)("Card Set Title", "titleInput");
-    // Creates the input fot the title
-    const input = (0, _utilityRenderFunctionsJs.createInput)("titleInput");
-    const submitButton = (0, _utilityRenderFunctionsJs.createSubmitButton)("Submit Set");
-    // Adds an event listener to the form.
-    // On submission, a new study set will be created.
-    form.addEventListener("submit", (e)=>submitSet(e, setCards));
-    //Adds elements to the form
+    // Creates the input for the title
+    const input = (0, _utilityRenderFunctionsJs.createInput)("text", "titleInput", "titleInput");
+    input.setAttribute("data-cy", "create-set-title");
+    //Creates the submit button
+    const submitButton = (0, _utilityRenderFunctionsJs.createSubmitButton)("Create Set");
+    submitButton.setAttribute("data-cy", "create-set-submit");
+    //Adds event listener to the form
+    form.addEventListener("submit", (event)=>{
+        event.preventDefault();
+        const title = input.value.trim();
+        if (!title) {
+            (0, _errorsJs.showError)("Title is required");
+            return;
+        }
+        setCards(title);
+        (0, _cardSetsPageJs.renderCardSetsPage)();
+    });
+    //Appends the elements to the form
     form.append(label, input, submitButton);
     return form;
-};
-// This function creates a new study set.
-// It assigns a title to the set and initializes an empty array for cards,
-// which can be added later on the flashcards page.
-const submitSet = (e, setCards)=>{
-    // Prevents default form behavior and screen refresh
-    e.preventDefault();
-    //Get value form title input
-    const title = e.target.titleInput.value;
-    // Errors if user entered an empty string
-    if (!title) (0, _errorsJs.showError)("TITLE CANNOT BE EMPTY");
-    else {
-        //Creates set object
-        const id = setCards.length ? setCards[setCards.length - 1].id + 1 : 1;
-        //Adds set data
-        setCards.push({
-            id,
-            title,
-            cards: []
-        });
-        //Adds new card set to DOM
-        (0, _cardSetsPageJs.renderCardSetsPage)();
-    }
 };
 
 },{"./cardSetsPage.js":"cykiM","./errors.js":"guLk0","./utilityRenderFunctions.js":"7Z6eA","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"aRpDC":[function(require,module,exports,__globalThis) {
@@ -1119,10 +1107,9 @@ const submitSet = (e, setCards)=>{
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "renderAboutPage", ()=>renderAboutPage);
-var _aboutImagePng = require("../images/aboutImage.png");
-var _aboutImagePngDefault = parcelHelpers.interopDefault(_aboutImagePng);
 // This function creates a header element
 var _utilityRenderFunctionsJs = require("./utilityRenderFunctions.js");
+const aboutPageImage = new URL(require("396cf6cdadac266a")).href;
 const renderAboutPage = ()=>{
     // Clear the main content area
     const main = document.querySelector("main");
@@ -1141,7 +1128,7 @@ const renderAboutPage = ()=>{
     let text = "Whether you're studying at night or during the day, Study Night's flashcard application is designed to help you grow your skills in any subject. Whether you're preparing for an exam or learning a new language, Study Night makes it easy to create flashcard sets that are available anytime, anywhere.\n\nStudy Night was created by experienced educators and developers who are passionate about helping students achieve their goals and making learning more accessible.";
     const aboutP = (0, _utilityRenderFunctionsJs.createElement)("p", text);
     // Create and set up the image
-    const aboutImage = (0, _utilityRenderFunctionsJs.createImage)((0, _aboutImagePngDefault.default), "Child Studying");
+    const aboutImage = (0, _utilityRenderFunctionsJs.createImage)(aboutPageImage, "Child Studying");
     // Append the text elements to the text container
     textContainer.append(heading, subHeading, aboutP);
     // Append the text container and image to the outer container
@@ -1150,17 +1137,19 @@ const renderAboutPage = ()=>{
     main.append(containerOuter);
 };
 
-},{"../images/aboutImage.png":"2Mk5X","./utilityRenderFunctions.js":"7Z6eA","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"2Mk5X":[function() {},{}],"aAmIa":[function(require,module,exports,__globalThis) {
+},{"./utilityRenderFunctions.js":"7Z6eA","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","396cf6cdadac266a":"5bKY4"}],"5bKY4":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("aboutImage.ffc1359f.png") + "?" + Date.now();
+
+},{}],"aAmIa":[function(require,module,exports,__globalThis) {
 //DO NOT CHANGE ANYTHING IN THIS FILE//
 // This file is responsible for loading the home page
 //Imports image for homepage
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "renderHomePage", ()=>renderHomePage);
-var _homePagePng = require("../images/homePage.png");
-var _homePagePngDefault = parcelHelpers.interopDefault(_homePagePng);
 //Helper functions
 var _utilityRenderFunctionsJs = require("./utilityRenderFunctions.js");
+const homePageImage = new URL(require("8ff8ce7dab9b7768")).href;
 //Renders home page
 const renderHomePage = ()=>{
     //Gets main element
@@ -1171,7 +1160,7 @@ const renderHomePage = ()=>{
     //Creates subheader element
     const subHeading = (0, _utilityRenderFunctionsJs.createElement)("h2", "A Digital Study Solution for the Modern World");
     //Creates elements
-    const image = (0, _utilityRenderFunctionsJs.createImage)((0, _homePagePngDefault.default), "Desk of laptops");
+    const image = (0, _utilityRenderFunctionsJs.createImage)(homePageImage, "Desk of laptops");
     //Container for elements
     const homeContainer = document.createElement("div");
     homeContainer.className = "homeContainer";
@@ -1179,6 +1168,9 @@ const renderHomePage = ()=>{
     main.append(homeContainer);
 };
 
-},{"../images/homePage.png":"9QOwg","./utilityRenderFunctions.js":"7Z6eA","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"9QOwg":[function() {},{}]},["9mUY7","dkgmw"], "dkgmw", "parcelRequire7efc", {})
+},{"./utilityRenderFunctions.js":"7Z6eA","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","8ff8ce7dab9b7768":"bfAH0"}],"bfAH0":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("homePage.ccf9bbbe.png") + "?" + Date.now();
+
+},{}]},["6Qg92","dkgmw"], "dkgmw", "parcelRequire7efc", {}, "./", "/")
 
 //# sourceMappingURL=starter.de29c812.js.map

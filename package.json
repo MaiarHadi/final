@@ -1,23 +1,14 @@
 {
   "name": "nd0011-c4-starter-v2",
   "version": "1.0.0",
-  "description": "In this Project Students will optimize and test a front-end web application called Study Night, a flashcard tool...",
+  "description": "Study Night - Flashcard Tool",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "gulp":"gulp"
+    "test": "mocha",
+    "gulp": "gulp",
+    "cypress": "cypress run",
+    "serve": "http-server starter -p 8080"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/udacity/nd0011-c4-starter.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/udacity/nd0011-c4-starter/issues"
-  },
-  "homepage": "https://github.com/udacity/nd0011-c4-starter#readme",
   "devDependencies": {
     "@eslint/js": "^9.29.0",
     "chai": "^5.2.0",
@@ -27,6 +18,7 @@
     "gulp": "^5.0.1",
     "gulp-cli": "^3.1.0",
     "gulp-shell": "^0.8.0",
+    "http-server": "^14.1.1",
     "mocha": "^11.6.0",
     "parcel": "^2.15.2"
   }

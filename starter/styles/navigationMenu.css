@@ -1,17 +1,16 @@
-/* TODO: Manually optimize CSS styling. */
-/* Remove unused and unnecessary styling and selectors */
-/* Navigation styling */
+/* Navigation Styling */
 body header {
-  width: 200px;
   width: 100px;
   cursor: pointer;
 }
 
+/* Text Transform for Header and Nav Items */
 body header h1,
 nav li {
   text-transform: uppercase;
 }
 
+/* Navigation List Items */
 body header nav li {
   margin: 10% 5%;
   border-bottom: 2px solid lightgray;

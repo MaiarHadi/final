@@ -1,7 +1,3 @@
-li {
-  list-style: none;
-}
-
 body {
   flex-direction: row;
   font-family: Inter, sans-serif;
@@ -14,6 +10,10 @@ main {
   width: 100%;
   padding: 5%;
   display: flex;
+}
+
+li {
+  list-style: none;
 }
 
 .notVisible {
@@ -32,7 +32,7 @@ button {
 
 @media (width <= 768px) {
   body {
-    flex-direction: row;
+    flex-direction: column;
   }
 }
 /*# sourceMappingURL=starter.7916b925.css.map */

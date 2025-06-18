@@ -25,41 +25,31 @@ const createSetForm = (setCards) => {
 
   //Creates the label for the title input
   const label = createLabel("Card Set Title", "titleInput");
-  // Creates the input fot the title
-  const input = createInput("titleInput");
-  const submitButton = createSubmitButton("Submit Set");
 
-  // Adds an event listener to the form.
-  // On submission, a new study set will be created.
-  form.addEventListener("submit", (e) => submitSet(e, setCards));
+  // Creates the input for the title
+  const input = createInput("text", "titleInput", "titleInput");
+  input.setAttribute("data-cy", "create-set-title"); 
 
-  //Adds elements to the form
-  form.append(label, input, submitButton);
-  return form;
-};
+  //Creates the submit button
+  const submitButton = createSubmitButton("Create Set");
+  submitButton.setAttribute("data-cy", "create-set-submit");
 
-// This function creates a new study set.
-// It assigns a title to the set and initializes an empty array for cards,
-// which can be added later on the flashcards page.
-const submitSet = (e, setCards) => {
-  // Prevents default form behavior and screen refresh
-  e.preventDefault();
-
-  //Get value form title input
-  const title = e.target.titleInput.value;
-
-  // Errors if user entered an empty string
-  if (!title) {
-    showError("TITLE CANNOT BE EMPTY");
-  } else {
-    //Creates set object
-    const id = setCards.length ? setCards[setCards.length - 1].id + 1 : 1;
-    //Adds set data
-    setCards.push({ id, title, cards: [] });
-
-    //Adds new card set to DOM
+  //Adds event listener to the form
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const title = input.value.trim();
+    if (!title) {
+      showError("Title is required");
+      return;
+    }
+    setCards(title);
     renderCardSetsPage();
-  }
+  });
+
+  //Appends the elements to the form
+  form.append(label, input, submitButton);
+
+  return form;
 };
 
 export { createSetForm };
